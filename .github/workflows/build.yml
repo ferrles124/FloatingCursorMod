@@ -2,7 +2,6 @@ name: Build Mod
 
 on:
   push:
-    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
@@ -11,28 +10,22 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Prepare libs
-        run: mkdir -p libs
-
-      - name: Download SMAPI
-        run: |
-          wget https://github.com/Pathoschild/SMAPI/releases/latest/download/SMAPI-installer.zip -O smapi.zip
-          unzip -o smapi.zip -d smapi
-          find smapi -type f -name "StardewModdingAPI.dll" -exec cp {} libs/ \;
-          ls libs
+        uses: actions/checkout@v3
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
+
+      - name: Restore
+        run: dotnet restore
 
       - name: Build
         run: dotnet build --configuration Release
 
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: FloatingCursorMod
+          path: bin/Release          name: FloatingCursorMod
           path: bin/Release/net6.0/
