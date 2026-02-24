@@ -5,10 +5,13 @@
     <OutputType>Library</OutputType>
     <AssemblyName>FloatingCursorMod</AssemblyName>
     <RootNamespace>FloatingCursorMod</RootNamespace>
+
+    <!-- Fake game path so SMAPI doesn't crash -->
+    <GamePath>$(MSBuildProjectDirectory)</GamePath>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Stardew.ModBuildConfig" Version="4.0.0" />
+    <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.0.0" />
   </ItemGroup>
 
 </Project>
