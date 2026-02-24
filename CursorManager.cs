@@ -1,61 +1,35 @@
+using Microsoft.Xna.Framework;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using StardewValley;
 
 namespace FloatingCursorMod
 {
     public class CursorManager
     {
-        private readonly IModHelper helper;
-        private readonly IMonitor monitor;
-
-        private Vector2 cursorPos = new Vector2(300, 300);
-        private bool dragging = false;
-
-        private Texture2D texture;
+        private readonly IModHelper Helper;
+        private readonly IMonitor Monitor;
 
         public CursorManager(IModHelper helper, IMonitor monitor)
         {
-            this.helper = helper;
-            this.monitor = monitor;
+            this.Helper = helper;
+            this.Monitor = monitor;
 
-            texture = new Texture2D(Game1.graphics.GraphicsDevice, 1, 1);
-            texture.SetData(new[] { Color.White });
+            helper.Events.GameLoop.UpdateTicked += OnUpdateTicked;
         }
 
-        public void HandleInput(ButtonPressedEventArgs e)
+        private void OnUpdateTicked(object sender, UpdateTickedEventArgs e)
         {
             if (!Context.IsWorldReady)
                 return;
 
-            dragging = true;
-            cursorPos = e.Cursor.ScreenPixels;
-        }
+            // ✅ HATALI SATIRIN DÜZELTİLMİŞ HALİ
+            var p = Game1.getMousePosition();
+            Vector2 pos = new Vector2(p.X, p.Y);
 
-        public void Update()
-        {
-            if (!Context.IsWorldReady)
-                return;
-
-            if (dragging)
-                cursorPos = Game1.getMousePosition();
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            if (!Context.IsWorldReady)
-                return;
-
-            Rectangle rect = new Rectangle(
-                (int)cursorPos.X - 20,
-                (int)cursorPos.Y - 20,
-                40,
-                40
-            );
-
-            spriteBatch.Draw(texture, rect, Color.Cyan * 0.6f);
+            // burada ne yapıyorsan devam
+            // örnek:
+            // Game1.mouseCursorTransparency = 1f;
         }
     }
 }
