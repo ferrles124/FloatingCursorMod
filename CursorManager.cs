@@ -8,48 +8,55 @@ namespace FloatingCursorMod
 {
     public class CursorManager
     {
-        private Vector2 position;
         private readonly IModHelper helper;
+
+        private Vector2 position = new Vector2(500, 500);
+        private bool visible = true;
+        private float speed = 8f;
 
         public CursorManager(IModHelper helper)
         {
             this.helper = helper;
-            this.position = new Vector2(500, 500);
         }
 
         public void HandleInput(ButtonPressedEventArgs e)
         {
-            if (!Context.IsWorldReady)
+            if (!Context.IsPlayerFree)
                 return;
 
-            if (e.Button == SButton.DPadUp)
-                position.Y -= 10;
-            if (e.Button == SButton.DPadDown)
-                position.Y += 10;
-            if (e.Button == SButton.DPadLeft)
-                position.X -= 10;
-            if (e.Button == SButton.DPadRight)
-                position.X += 10;
+            if (e.Button == SButton.DPadUp) position.Y -= speed;
+            if (e.Button == SButton.DPadDown) position.Y += speed;
+            if (e.Button == SButton.DPadLeft) position.X -= speed;
+            if (e.Button == SButton.DPadRight) position.X += speed;
+
+            if (e.Button == SButton.A)
+            {
+                Game1.setMousePosition((int)position.X, (int)position.Y);
+                Game1.pressActionButton(Game1.input.GetMouseState().X, Game1.input.GetMouseState().Y);
+            }
         }
 
         public void Update()
         {
-            if (!Context.IsWorldReady)
+            if (!visible)
                 return;
-
-            Game1.setMousePosition((int)position.X, (int)position.Y);
         }
 
-        public void Draw(SpriteBatch b)
+        public void Draw(SpriteBatch spriteBatch)
         {
-            if (!Context.IsWorldReady)
+            if (!visible)
                 return;
 
-            b.Draw(
+            spriteBatch.Draw(
                 Game1.mouseCursors,
                 position,
-                new Rectangle(0, 0, 64, 64),
-                Color.White
+                Game1.getSourceRectForStandardTileSheet(Game1.mouseCursors, 0, 16, 16),
+                Color.White,
+                0f,
+                Vector2.Zero,
+                4f,
+                SpriteEffects.None,
+                1f
             );
         }
     }
