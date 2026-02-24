@@ -1,6 +1,5 @@
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
-using Microsoft.Xna.Framework;
 
 namespace FloatingCursorMod
 {
@@ -10,7 +9,7 @@ namespace FloatingCursorMod
 
         public override void Entry(IModHelper helper)
         {
-            cursor = new CursorManager(helper, Monitor);
+            cursor = new CursorManager(helper);
 
             helper.Events.Input.ButtonPressed += OnButtonPressed;
             helper.Events.GameLoop.UpdateTicked += OnUpdate;
