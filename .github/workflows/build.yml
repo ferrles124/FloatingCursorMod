@@ -13,19 +13,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Prepare libs
+        run: mkdir -p libs
+
       - name: Download SMAPI
         run: |
-          wget https://github.com/Pathoschild/SMAPI/releases/latest/download/SMAPI-4.5.1-installer.zip -O smapi.zip
-          unzip smapi.zip -d smapi
-          find smapi -name "StardewModdingAPI.dll" -exec cp {} libs/ \;
+          wget https://github.com/Pathoschild/SMAPI/releases/latest/download/SMAPI-installer.zip -O smapi.zip
+          unzip -o smapi.zip -d smapi
+          find smapi -type f -name "StardewModdingAPI.dll" -exec cp {} libs/ \;
+          ls libs
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 6.0.x
-
-      - name: Restore
-        run: dotnet restore
 
       - name: Build
         run: dotnet build --configuration Release
