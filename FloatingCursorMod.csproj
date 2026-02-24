@@ -6,8 +6,8 @@
     <AssemblyName>FloatingCursorMod</AssemblyName>
     <RootNamespace>FloatingCursorMod</RootNamespace>
 
-    <!-- Fake game path so SMAPI doesn't crash -->
-    <GamePath>$(MSBuildProjectDirectory)</GamePath>
+    <!-- SMAPI deploy kapalı -->
+    <EnableModDeploy>false</EnableModDeploy>
   </PropertyGroup>
 
   <ItemGroup>
