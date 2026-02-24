@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using StardewModdingAPI;
 using StardewModdingAPI.Events;
 using StardewValley;
@@ -7,29 +8,49 @@ namespace FloatingCursorMod
 {
     public class CursorManager
     {
-        private readonly IModHelper Helper;
-        private readonly IMonitor Monitor;
+        private Vector2 position;
+        private readonly IModHelper helper;
 
-        public CursorManager(IModHelper helper, IMonitor monitor)
+        public CursorManager(IModHelper helper)
         {
-            this.Helper = helper;
-            this.Monitor = monitor;
-
-            helper.Events.GameLoop.UpdateTicked += OnUpdateTicked;
+            this.helper = helper;
+            this.position = new Vector2(500, 500);
         }
 
-        private void OnUpdateTicked(object sender, UpdateTickedEventArgs e)
+        public void HandleInput(ButtonPressedEventArgs e)
         {
             if (!Context.IsWorldReady)
                 return;
 
-            // ✅ HATALI SATIRIN DÜZELTİLMİŞ HALİ
-            var p = Game1.getMousePosition();
-            Vector2 pos = new Vector2(p.X, p.Y);
+            if (e.Button == SButton.DPadUp)
+                position.Y -= 10;
+            if (e.Button == SButton.DPadDown)
+                position.Y += 10;
+            if (e.Button == SButton.DPadLeft)
+                position.X -= 10;
+            if (e.Button == SButton.DPadRight)
+                position.X += 10;
+        }
 
-            // burada ne yapıyorsan devam
-            // örnek:
-            // Game1.mouseCursorTransparency = 1f;
+        public void Update()
+        {
+            if (!Context.IsWorldReady)
+                return;
+
+            Game1.setMousePosition((int)position.X, (int)position.Y);
+        }
+
+        public void Draw(SpriteBatch b)
+        {
+            if (!Context.IsWorldReady)
+                return;
+
+            b.Draw(
+                Game1.mouseCursors,
+                position,
+                new Rectangle(0, 0, 64, 64),
+                Color.White
+            );
         }
     }
 }
