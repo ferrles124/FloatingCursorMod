@@ -13,15 +13,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Download SMAPI
-        run: |
-          wget https://github.com/Pathoschild/SMAPI/releases/latest/download/SMAPI-latest.zip
-          unzip SMAPI-latest.zip -d smapi
-
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 6.0.x
+
+      - name: Restore
+        run: dotnet restore
 
       - name: Build
         run: dotnet build --configuration Release
