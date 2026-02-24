@@ -30,11 +30,8 @@ namespace FloatingCursorMod
             if (!Context.IsWorldReady)
                 return;
 
-            if (e.Button.IsUseToolButton())
-            {
-                dragging = true;
-                cursorPos = e.Cursor.ScreenPixels;
-            }
+            dragging = true;
+            cursorPos = e.Cursor.ScreenPixels;
         }
 
         public void Update()
@@ -43,9 +40,7 @@ namespace FloatingCursorMod
                 return;
 
             if (dragging)
-            {
                 cursorPos = Game1.getMousePosition();
-            }
         }
 
         public void Draw(SpriteBatch spriteBatch)
