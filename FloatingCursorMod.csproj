@@ -5,13 +5,11 @@
     <OutputType>Library</OutputType>
     <AssemblyName>FloatingCursorMod</AssemblyName>
     <RootNamespace>FloatingCursorMod</RootNamespace>
-
-    <!-- SMAPI deploy kapalı -->
-    <EnableModDeploy>false</EnableModDeploy>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.0.0" />
+    <PackageReference Include="StardewModdingAPI" Version="4.0.0" />
+    <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
   </ItemGroup>
 
 </Project>
