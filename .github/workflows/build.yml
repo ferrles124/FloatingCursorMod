@@ -10,23 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Download SMAPI
+        run: |
+          wget https://github.com/Pathoschild/SMAPI/releases/latest/download/SMAPI-latest.zip
+          unzip SMAPI-latest.zip -d smapi
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 6.0.x
 
-      - name: Restore dependencies
-        run: dotnet restore
-
-      - name: Build project
+      - name: Build
         run: dotnet build --configuration Release
 
-      - name: Upload artifact
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: FloatingCursorMod
-          path: |
-            bin/Release/net6.0/
+          path: bin/Release/net6.0/
