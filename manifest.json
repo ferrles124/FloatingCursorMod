@@ -1,0 +1,9 @@
+{
+  "Name": "Floating Cursor Mobile",
+  "Author": "MeD",
+  "Version": "1.0.0",
+  "Description": "Floating cursor system for mobile players.",
+  "UniqueID": "MeD.FloatingCursor",
+  "EntryDll": "FloatingCursorMod.dll",
+  "MinimumApiVersion": "4.0.0"
+}
