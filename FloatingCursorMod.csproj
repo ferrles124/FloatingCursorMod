@@ -2,14 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-
-    <!-- SMAPI build config kapatıyoruz -->
-    <EnableModBuildConfig>false</EnableModBuildConfig>
   </PropertyGroup>
-
 
   <ItemGroup>
     <Reference Include="StardewModdingAPI">
@@ -23,13 +18,6 @@
     <Reference Include="MonoGame.Framework">
       <HintPath>libs/MonoGame.Framework.dll</HintPath>
     </Reference>
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <None Include="manifest.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>
