@@ -5,13 +5,11 @@
     <OutputType>Library</OutputType>
     <AssemblyName>FloatingCursorMod</AssemblyName>
     <RootNamespace>FloatingCursorMod</RootNamespace>
-
-    <!-- OYUN KLASÖRÜ ARAMAYI KAPAT -->
-    <GamePath>.</GamePath>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.0.0" />
+    <!-- SMAPI referansı -->
+    <PackageReference Include="StardewModdingAPI" Version="4.0.0" />
   </ItemGroup>
 
 </Project>
