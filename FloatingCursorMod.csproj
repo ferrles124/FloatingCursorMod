@@ -2,15 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>FloatingCursorMod</RootNamespace>
+    <AssemblyName>FloatingCursorMod</AssemblyName>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
-    <AssemblyName>FloatingCursorMod</AssemblyName>
-    <RootNamespace>FloatingCursorMod</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <Reference Include="StardewModdingAPI">
       <HintPath>libs/StardewModdingAPI.dll</HintPath>
+    </Reference>
+    <Reference Include="StardewValley">
+      <HintPath>libs/StardewValley.dll</HintPath>
     </Reference>
   </ItemGroup>
 
