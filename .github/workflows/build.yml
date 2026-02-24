@@ -2,6 +2,7 @@ name: Build Mod
 
 on:
   push:
+    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
@@ -9,13 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 6.0.x
+          dotnet-version: 8.0.x
 
       - name: Restore
         run: dotnet restore
@@ -23,8 +24,9 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release
 
-      - name: Upload Artifact
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: FloatingCursorMod
-          path: bin/Release/net6.0/
+          path: |
+            bin/Release/net8.0/
